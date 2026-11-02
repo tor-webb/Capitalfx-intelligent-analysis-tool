@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>CAPITALFX INTELLIGENCE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+ :root{--bg:#050817;--panel:#091329;--panel2:#0d1b36;--line:#153c69;--cyan:#00d9ff;--blue:#187cff;--purple:#a855f7;--green:#00f0a0;--red:#ff386d;--gold:#ffc84a;--muted:#91a5c4;--white:#eef8ff;--glow:0 0 22px #00cfff30}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#13285a 0,transparent 55%),var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif;font-size:13px;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer;color:inherit}.app-shell{max-width:1800px;margin:auto;padding:12px 16px 0}.topbar{display:flex;align-items:center;gap:18px;min-height:72px;border:1px solid #214a8c;border-radius:18px;padding:10px 16px;background:#060d20eF;box-shadow:0 0 28px #1b5dff20;position:sticky;top:8px;z-index:20;backdrop-filter:blur(18px)}.brand{display:flex;gap:10px;align-items:center;color:inherit;text-decoration:none;min-width:250px}.brand-mark{font-size:42px;color:var(--cyan);text-shadow:0 0 18px var(--cyan)}.brand b,.brand strong,.brand small{display:block}.brand b{font-size:18px;color:#8ff8ff;letter-spacing:1px}.brand strong{font-size:15px;letter-spacing:2px}.brand small{font-size:8px;color:#91a5c4;letter-spacing:1.5px;margin-top:4px}.main-nav{display:flex;gap:4px;flex:1;justify-content:center}.nav-btn{border:1px solid transparent;background:transparent;padding:12px 10px;border-radius:11px;color:#b4c5df;white-space:nowrap;font-size:15px}.nav-btn span{font-size:11px;margin-left:4px}.nav-btn.active,.nav-btn:hover{border-color:#08cfff;background:linear-gradient(130deg,#064c83aa,#31145c88);color:#fff;box-shadow:0 0 15px #00bfff45}.connection{display:flex;align-items:center;gap:9px;min-width:116px}.connection i,.feed-pill i{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px currentColor}.connection b,.connection small{display:block}.connection b{font-size:10px;color:var(--gold)}.connection small{font-size:9px;color:var(--muted);margin-top:3px}.menu-toggle{display:none;background:none;border:1px solid var(--line);padding:8px;border-radius:8px}
+main{padding:16px 0 24px}.view{display:none}.view.active{display:block}.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}.stat-card,.panel{background:linear-gradient(145deg,#0b1831ed,#060d1e);border:1px solid var(--line);border-radius:13px;box-shadow:var(--glow);position:relative;overflow:hidden}.stat-card{padding:16px 18px;min-height:100px}.stat-card:after{content:"";position:absolute;inset:auto -20px -50px auto;width:120px;height:100px;border-radius:50%;background:currentColor;filter:blur(55px);opacity:.18}.stat-card span,.stat-card small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}.stat-card b{display:block;font-size:23px;margin:9px 0 5px;font-family:"Space Mono",monospace}.stat-card small{font-size:9px;letter-spacing:0}.cyan{color:var(--cyan);border-color:#007c9d}.purple{color:#be77ff;border-color:#7137a9}.gold{color:var(--gold);border-color:#987326}.green{color:var(--green);border-color:#087d61}.pink{color:#ff70ce;border-color:#8b3482}
+.dashboard-grid{display:grid;grid-template-columns:290px minmax(400px,1fr) 300px;gap:12px;align-items:stretch}.panel{padding:15px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panel h2,.panel-head h2{font-size:13px;margin:0;font-weight:700;letter-spacing:.3px}.eyebrow{font-size:9px;color:var(--cyan);letter-spacing:1.5px}.tag,.live-tag{font-size:9px;font-weight:700;padding:5px 8px;border:1px solid #12678a;border-radius:20px;color:var(--cyan);white-space:nowrap}.tag.warning{color:var(--gold);border-color:#85631b}.tag.danger{color:#ff7b9c;border-color:#963a5a}.tag.muted{color:var(--muted);border-color:#344663}.search, input,select{background:#07142a;border:1px solid #1d4b7d;border-radius:8px;color:#e9f5ff;padding:10px;width:100%;outline:none}.search:focus,input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 2px #00d9ff20}.filter-row{display:flex;gap:5px;margin:10px 0}.filter,.timeframes button{background:#0b1a33;border:1px solid #1b416b;border-radius:7px;padding:7px 10px;color:#a9bdd9;font-size:10px}.filter.active,.timeframes button.active{background:#0876d9;color:white;border-color:#0ad7ff;box-shadow:0 0 10px #00cfff55}.market-list{max-height:590px;overflow:auto}.market-item{display:grid;grid-template-columns:1fr auto;gap:4px;padding:10px 8px;border-bottom:1px solid #14294a;cursor:pointer;border-radius:6px}.market-item:hover,.market-item.selected{background:#0d2d50;border-left:2px solid var(--cyan)}.market-item b{font-size:11px}.market-item small{display:block;color:var(--muted);font-size:9px;margin-top:4px}.market-item strong{font:11px "Space Mono";text-align:right}.market-item em{font-style:normal;font-size:9px;text-align:right;color:var(--muted)}.chart-panel{min-width:0}.chart-heading{display:flex;justify-content:space-between;align-items:center}.chart-heading h1{font-size:19px;margin:5px 0}.price-line{display:flex;gap:12px;align-items:center}.price-line b{font:21px "Space Mono"}.price-line span{font-size:11px;color:var(--green)}.feed-pill{display:flex;align-items:center;gap:7px;color:var(--gold);font-size:9px}.chart-tools{display:flex;justify-content:space-between;align-items:center;margin:16px 0 8px}.timeframes{display:flex;gap:5px}.toggle-label{font-size:10px;color:var(--muted);display:flex;gap:6px;align-items:center}.toggle-label input{width:auto}.chart-wrap{height:310px;background:linear-gradient(180deg,#06132a,#071021);border:1px solid #14355e;border-radius:9px;overflow:hidden}.chart-wrap canvas{width:100%;height:100%;display:block}.chart-legend{display:flex;gap:15px;flex-wrap:wrap;margin:9px 0;color:var(--muted);font-size:9px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}.dot.price{background:var(--cyan)}.dot.ema{background:#ff50d8}.dot.sma{background:#ffc84a}.dot.band{background:#438cff}.indicator-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.indicator{background:#0b1a33;padding:8px;border-radius:7px}.indicator small,.indicator b{display:block}.indicator small{font-size:8px;color:var(--muted)}.indicator b{font:12px "Space Mono";margin-top:5px}.chart-note,.footnote{font-size:9px;color:#8298b8;line-height:1.5;margin:10px 0 0}.right-stack{display:flex;flex-direction:column;gap:12px}.signal-main{display:flex;justify-content:space-around;align-items:center;padding:9px 0}.signal-word{font-size:31px;font-weight:800;color:var(--gold);text-shadow:0 0 18px currentColor}.confidence-ring{width:91px;height:91px;border-radius:50%;border:7px solid #17516c;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 18px #00cfff2c}.confidence-ring b{font:19px "Space Mono"}.confidence-ring small{font-size:7px;color:var(--muted)}.reason-list{font-size:10px;color:#c3d5ef;line-height:1.7}.reason-list p{margin:4px 0}.reason-list .positive{color:var(--green)}.reason-list .negative{color:#ff809e}.signal-explain{font-size:10px;line-height:1.6;color:var(--muted);margin:10px 0}.outline-btn,.primary-btn{border-radius:8px;padding:10px 13px;font-weight:700;font-size:10px;width:100%;border:1px solid #087db1;background:#071d38;color:var(--cyan)}.primary-btn{background:linear-gradient(110deg,#0876d9,#5421a5);border-color:#18caff;color:white;box-shadow:0 0 13px #087cff40}.trade-panel label,.panel label{display:block;color:var(--muted);font-size:10px;margin:9px 0}.trade-panel select,.trade-panel input{display:block;margin-top:5px;font-size:11px;padding:8px}.manual-note{font-size:9px;line-height:1.5;color:var(--gold);background:#31270f50;padding:8px;border-radius:6px;margin:10px 0}.hidden{display:none!important}.lower-grid{display:grid;grid-template-columns:1.1fr 1fr .9fr;gap:12px;margin-top:12px}.text-btn{background:none;color:var(--cyan);font-size:10px}.opportunity-row,.recent-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #14294a;gap:8px;font-size:10px}.opportunity-row b{font-size:10px}.signal-badge{padding:4px 7px;border-radius:5px;font-size:9px;font-weight:800}.signal-badge.BUY{background:#00a87930;color:var(--green)}.signal-badge.SELL{background:#f33b6730;color:#ff809e}.signal-badge.WAIT{background:#c08a2730;color:var(--gold)}.quality-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:20px 0}.quality-grid b,.quality-grid small{display:block}.quality-grid b{font:22px "Space Mono"}.quality-grid small{font-size:8px;color:var(--muted);margin-top:5px}.muted-copy{font-size:10px;color:var(--muted);line-height:1.6}.page-title{display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px;gap:16px}.page-title h1{font-size:25px;margin:6px 0}.page-title p{color:var(--muted);font-size:11px;margin:0}.page-title .primary-btn{width:auto;min-width:130px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:700px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #183253;font-size:10px}th{color:var(--muted);font-size:9px;letter-spacing:.8px}td{font-family:"Space Mono";font-size:10px}td:first-child{font-family:Inter;font-weight:700}.analysis-grid,.risk-grid,.settings-grid,.automation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metric-rows{margin-top:12px}.metric-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #183253;font-size:10px}.metric-row span{color:var(--muted)}.metric-row b{font:11px "Space Mono"}.digit-analysis{margin-top:12px}.digit-bars{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;align-items:end;height:120px;padding:12px 0}.digit-bar{display:flex;flex-direction:column;justify-content:end;align-items:center;height:100%;gap:5px}.digit-bar i{display:block;width:70%;min-height:3px;background:linear-gradient(0deg,#275dff,#00d9ff);border-radius:5px 5px 0 0}.digit-bar small{font:9px "Space Mono";color:var(--muted)}.suggestion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}.suggestion-card{background:#091329;border:1px solid #174c78;border-radius:12px;padding:15px}.suggestion-card h3{font-size:13px}.suggestion-card .signal-word{font-size:23px}.suggestion-card p{font-size:10px;line-height:1.6;color:var(--muted)}.compat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}.compat-grid div{background:#0b1a33;padding:12px;border-radius:8px}.compat-grid p{font-size:9px;line-height:1.6;color:var(--muted)}.status-orb{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#143e67;color:var(--cyan);font-size:22px;margin-bottom:12px}.switch-row{display:flex;justify-content:space-between;align-items:center;margin:18px 0;font-size:10px}.switch input{display:none}.switch span{display:block;width:40px;height:22px;border-radius:20px;background:#30415a;position:relative}.switch span:after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:white;top:3px;left:3px;transition:.2s}.switch input:checked+span{background:#078b74}.switch input:checked+span:after{left:21px}.blocked-panel{border-color:#74334d}.lock-icon{font-size:27px;margin-bottom:10px}.blocked-panel p,.blocked-panel li,.safeguard-list li{font-size:10px;line-height:1.7;color:var(--muted)}.risk-result{padding:14px;background:#0b1a33;border-radius:8px;margin-top:14px}.risk-result small,.risk-result b{display:block}.risk-result small{color:var(--muted);font-size:9px}.risk-result b{font:22px "Space Mono";color:var(--green);margin-top:5px}.source-choice{padding:12px;border:1px solid #1b496f;border-radius:8px;margin:12px 0}.source-choice b{display:inline-block;margin-right:8px}.source-choice p{font-size:9px;line-height:1.5;color:var(--muted)}.source-choice.disabled{opacity:.65;border-style:dashed}.compact-select{width:190px}.recent-list{max-height:220px;overflow:auto}footer{border-top:1px solid #17365d;padding:16px 4px 20px;color:#8096b7;font-size:9px;display:flex;justify-content:space-between;gap:10px}footer span{color:#5d7395}
+@media(max-width:1300px){.topbar{flex-wrap:wrap}.brand{min-width:210px}.main-nav{order:3;flex-basis:100%;justify-content:flex-start;overflow:auto}.dashboard-grid{grid-template-columns:260px minmax(350px,1fr)}.right-stack{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}.lower-grid{grid-template-columns:1fr 1fr}.lower-grid .panel:last-child{grid-column:1/-1}}
+@media(max-width:800px){.app-shell{padding:8px}.topbar{top:4px;padding:9px}.brand{min-width:0;flex:1}.brand-mark{font-size:32px}.brand b{font-size:14px}.brand strong{font-size:12px}.brand small{font-size:7px}.connection{min-width:auto}.menu-toggle{display:block}.main-nav{display:none;order:4;flex-direction:column;align-items:stretch}.main-nav.open{display:flex}.nav-btn{text-align:left}.nav-btn span{font-size:12px}.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-card:last-child{grid-column:span 2}.dashboard-grid{grid-template-columns:1fr}.market-panel{order:2}.chart-panel{order:1}.right-stack{order:3;grid-column:auto;grid-template-columns:1fr}.market-list{max-height:230px;display:grid;grid-template-columns:1fr 1fr;column-gap:8px}.chart-wrap{height:250px}.lower-grid{grid-template-columns:1fr}.lower-grid .panel:last-child{grid-column:auto}.analysis-grid,.risk-grid,.settings-grid,.automation-grid{grid-template-columns:1fr}.suggestion-grid{grid-template-columns:1fr}.compat-grid{grid-template-columns:1fr 1fr}.page-title{align-items:flex-start;flex-direction:column}.page-title .primary-btn{width:100%}.compact-select{width:100%}footer{flex-direction:column}.indicator-strip{grid-template-columns:repeat(2,1fr)}}
+
+  
+/* ===== PROFESSIONAL SCANNER LAYOUT ===== */
+#view-scanner{max-width:100%;padding-bottom:28px}
+#view-scanner .page-title{align-items:center;gap:24px;margin:14px 0 24px;padding:8px 2px}
+#view-scanner .page-title>div:first-child{min-width:0}
+#view-scanner .page-title h1{font-size:clamp(25px,2.4vw,36px);letter-spacing:-1px}
+#view-scanner .page-title p{font-size:12px;line-height:1.6}
+#view-scanner .scanner-controls{display:grid;grid-template-columns:repeat(3,minmax(112px,1fr));gap:8px;flex:0 0 auto}
+#view-scanner .scanner-controls button{width:auto;min-width:0;min-height:42px;padding:11px 14px;white-space:nowrap}
+#view-scanner .scanner-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(245px,.7fr);gap:16px;align-items:stretch}
+#view-scanner .radar-panel,#view-scanner .scan-side{min-width:0;padding:20px}
+#view-scanner .radar-panel{overflow:hidden}
+#view-scanner .radar-stage{min-height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px 10px 12px;position:relative}
+#view-scanner .radar-grid{width:min( min(66vw,430px),100%);aspect-ratio:1;position:relative;border-radius:50%;overflow:hidden;border:1px solid #00d9ff70;background:radial-gradient(circle,#0b3150 0%,#071a32 48%,#061126 72%);box-shadow:0 0 0 10px #00cfff09,0 0 0 22px #00cfff06,0 0 48px #00cfff25,inset 0 0 45px #00cfff20}
+#view-scanner .radar-grid:before,#view-scanner .radar-grid:after{content:"";position:absolute;border:1px solid #00d9ff48;border-radius:50%;inset:16%}
+#view-scanner .radar-grid:after{inset:33%}
+#view-scanner .radar-grid>i{position:absolute;display:block;background:#00d9ff36}
+#view-scanner .radar-grid>i:nth-child(1){height:1px;left:0;right:0;top:50%}
+#view-scanner .radar-grid>i:nth-child(2){width:1px;top:0;bottom:0;left:50%}
+#view-scanner .radar-grid>i:nth-child(3),#view-scanner .radar-grid>i:nth-child(4){height:1px;left:7%;right:7%;top:50%;transform:rotate(45deg)}
+#view-scanner .radar-grid>i:nth-child(4){transform:rotate(-45deg)}
+#view-scanner .radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 72%,#00d9ff08 78%,#00d9ff55 100%);animation:capitalRadar 4s linear infinite;transform-origin:center}
+#view-scanner .radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:#bafaff;font:800 19px "Space Mono";letter-spacing:2px;background:radial-gradient(circle,#12628a,#071b34 72%);border:1px solid #00d9ff;box-shadow:0 0 25px #00d9ff70;z-index:2}
+#view-scanner .radar-point{position:absolute;width:9px;height:9px;border-radius:50%;background:#00f0a0;box-shadow:0 0 12px #00f0a0;z-index:3;animation:radarBlink 1.5s ease-in-out infinite}
+#view-scanner .radar-point.p1{left:29%;top:26%}#view-scanner .radar-point.p2{left:69%;top:36%;animation-delay:.3s}
+#view-scanner .radar-point.p3{left:37%;top:72%;animation-delay:.7s}#view-scanner .radar-point.p4{left:77%;top:68%;animation-delay:1s}
+#view-scanner .radar-caption{font:700 10px "Space Mono";letter-spacing:1.2px;text-align:center;color:var(--cyan);min-height:16px}
+@keyframes capitalRadar{to{transform:rotate(360deg)}}@keyframes radarBlink{50%{opacity:.25;transform:scale(.65);box-shadow:0 0 3px #00f0a0}}
+#view-scanner .radar-panel.scanning .radar-grid{animation:radarPulse 1.8s ease-in-out infinite}
+#view-scanner .radar-panel.paused .radar-sweep{animation-play-state:paused}
+@keyframes radarPulse{50%{box-shadow:0 0 0 14px #00cfff0d,0 0 0 28px #00cfff08,0 0 65px #00cfff45,inset 0 0 55px #00cfff30}}
+#view-scanner .scan-progress-head{display:flex;justify-content:space-between;gap:12px;margin:8px 0;font-size:11px;color:var(--muted)}
+#view-scanner .scan-progress{height:7px;background:#172944;border-radius:20px;overflow:hidden}
+#view-scanner .scan-progress i{display:block;width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#087bff,#00e5ff,#00f0a0);box-shadow:0 0 12px #00d9ff;transition:width .35s}
+#view-scanner .scan-terminal{margin-top:18px;border:1px solid #17446b;border-radius:10px;background:#030b18;overflow:hidden}
+#view-scanner .terminal-head{display:flex;justify-content:space-between;padding:10px 13px;border-bottom:1px solid #173452;color:#8fb7d8;font:700 10px "Space Mono";letter-spacing:.8px}
+#view-scanner .terminal-live{color:var(--green)}
+#view-scanner .terminal-lines{max-height:155px;overflow:auto;padding:8px 13px;font:10px/1.8 "Space Mono";color:#a8c4df}
+#view-scanner .terminal-lines p{margin:3px 0;overflow-wrap:anywhere}
+#view-scanner .terminal-lines p b{color:var(--cyan);margin-right:8px}
+#view-scanner .scan-side{align-self:stretch}
+#view-scanner .scan-metric{display:flex;justify-content:space-between;gap:10px;padding:15px 0;border-bottom:1px solid #183253;font-size:11px}
+#view-scanner .scan-metric span{color:var(--muted)}#view-scanner .scan-metric b{font:700 12px "Space Mono";text-align:right}
+#view-scanner .scan-divider{height:1px;background:#21405e;margin:18px 0}
+#view-scanner .scan-side>label:not(.switch-row){display:block;margin:18px 0 8px;color:var(--muted);font-size:11px}
+#view-scanner .scan-side select{width:100%;margin-top:8px;background:#0a1b32;color:var(--white);border:1px solid #245078;border-radius:8px;padding:10px}
+#view-scanner .footnote{font-size:10px;line-height:1.7;color:var(--muted);margin:14px 2px}
+#view-scanner .scanner-results-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 14px}
+#view-scanner .scanner-results-head h2{font-size:20px;margin:5px 0}
+#view-scanner .scanner-filters{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 16px}
+#view-scanner .contract-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#view-scanner .contract-card{min-width:0;padding:17px;border:1px solid #1b4d76;border-radius:13px;background:linear-gradient(145deg,#0c1c35,#071124);box-shadow:0 8px 25px #0002;position:relative;overflow:hidden}
+#view-scanner .contract-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(#00d9ff,#8b5cf6)}
+#view-scanner .contract-card .eyebrow{font-size:9px;line-height:1.5}
+#view-scanner .contract-card h3{font-size:15px;margin:9px 0 12px}
+#view-scanner .contract-pick{font:800 20px "Space Mono";color:#7deeff;margin:10px 0 16px;overflow-wrap:anywhere}
+#view-scanner .contract-meta{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #1a3554;font-size:10px}
+#view-scanner .contract-meta span{color:var(--muted)}#view-scanner .contract-meta b{text-align:right}
+#view-scanner .contract-card p{font-size:10px;line-height:1.6;color:var(--muted);margin:10px 0 0}
+#view-scanner .empty-scan{grid-column:1/-1;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px}
+#view-scanner .empty-orb{width:66px;height:66px;border:1px solid #00d9ff;border-radius:50%;display:grid;place-items:center;color:var(--cyan);font-size:30px;box-shadow:0 0 25px #00d9ff35;margin-bottom:10px}
+#view-scanner .scan-table-panel{margin-top:18px;overflow:hidden}
+#view-scanner .table-wrap{max-width:100%}
+#view-scanner .danger-text{color:var(--red)}
+#view-scanner .radar-point{width:13px;height:13px;transition:background .5s,box-shadow .5s;}
+#view-scanner .radar-point:after{content:attr(data-vol);position:absolute;left:15px;top:-4px;white-space:nowrap;font:700 8px "Space Mono";color:currentColor;text-shadow:0 1px 4px #000}
+#view-scanner .radar-point.vol-low{background:#00d9ff;box-shadow:0 0 14px #00d9ff;color:#00d9ff}
+#view-scanner .radar-point.vol-mid{background:#ffd34e;box-shadow:0 0 14px #ffd34e;color:#ffd34e}
+#view-scanner .radar-point.vol-high{background:#ff477e;box-shadow:0 0 16px #ff477e;color:#ff477e}
+#view-scanner .entry-feed{display:flex;flex-direction:column;min-height:100%;}
+#view-scanner .entry-current{margin:10px 0 16px;padding:17px 13px;min-height:250px;border:1px solid #175477;border-radius:12px;background:radial-gradient(circle at 50% 0%,#12345a,#071225 70%);text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:inset 0 0 28px #00cfff12,0 0 24px #00cfff12}
+#view-scanner .entry-icon{width:62px;height:62px;border:1px solid var(--cyan);border-radius:50%;display:grid;place-items:center;font-size:28px;color:var(--cyan);box-shadow:0 0 22px #00d9ff50}
+#view-scanner .entry-empty-title{font-size:16px;font-weight:800}
+#view-scanner .entry-current p{font-size:10px;line-height:1.6;color:var(--muted);margin:0}
+#view-scanner .entry-symbol{font:800 20px "Space Mono";color:var(--green);text-shadow:0 0 12px currentColor}
+#view-scanner .entry-score{font:800 34px "Space Mono";color:var(--gold)}
+#view-scanner .entry-score small{display:block;font:700 8px Inter,sans-serif;color:var(--muted);letter-spacing:1px}
+#view-scanner .entry-count-row{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #183253;font-size:10px}
+#view-scanner .entry-count-row span{color:var(--muted)}#view-scanner .entry-count-row b{font:700 10px "Space Mono";text-align:right}
+#view-scanner .entry-flag{font-size:9px;font-weight:800;padding:6px 9px;border-radius:20px;border:1px solid #a16c1d;color:#ffd34e}
+#view-scanner .radar-point.active-point{transform:scale(1.8);}
+body.light-theme #view-scanner .entry-current{background:linear-gradient(145deg,#f4fbff,#e3f2ff);border-color:#9bcce5}
+body.light-theme #view-scanner .radar-grid{background:radial-gradient(circle,#e1f7ff,#c4e7f7 70%,#eaf5ff);box-shadow:0 0 0 10px #0088cc0b,0 0 0 22px #0088cc08,0 0 35px #0088cc20,inset 0 0 35px #0088cc20}
+body.light-theme #view-scanner .radar-center{background:radial-gradient(circle,#b8efff,#eaf8ff 72%);color:#075477}
+body.light-theme #view-scanner .contract-card{background:linear-gradient(145deg,#fff,#edf7ff);border-color:#b8d9ec}
+body.light-theme #view-scanner .scan-terminal{background:#071426}
+body.light-theme #view-scanner .scan-side select{background:#fff;color:#14253a}
+@media(max-width:1050px){#view-scanner .scanner-layout{grid-template-columns:1fr}#view-scanner .radar-stage{min-height:360px}#view-scanner .radar-grid{width:min(70vw,360px)}#view-scanner .contract-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){#view-scanner .page-title{align-items:stretch;flex-direction:column}#view-scanner .scanner-controls{width:100%;grid-template-columns:1fr 1fr 1fr}#view-scanner .scanner-controls button{font-size:10px;padding:10px 5px}#view-scanner .radar-panel,#view-scanner .scan-side{padding:13px}#view-scanner .radar-stage{min-height:300px}#view-scanner .radar-grid{width:min(82vw,310px)}#view-scanner .contract-results{grid-template-columns:1fr}#view-scanner .scanner-results-head{align-items:flex-start;flex-direction:column}}
+
+
+  /* ===== DEFAULT WHITE THEME ===== */
+  body.light-theme{
+    --bg:#f4f7fb;--panel:#ffffff;--panel2:#f0f5fa;--line:#d8e2ee;
+    --cyan:#087eaa;--blue:#187cff;--purple:#7844bd;--green:#07865e;
+    --red:#d9365d;--gold:#a66b08;--muted:#64748b;--white:#172638;
+    --glow:0 5px 20px #193b5b0d;
+    background:#f4f7fb;color:#172638;
+  }
+  body.light-theme .topbar{background:#ffffffed;border-color:#d8e2ee;box-shadow:0 4px 18px #183b5b12}
+  body.light-theme .brand b{color:#087eaa}
+  body.light-theme .brand small{color:#64748b}
+  body.light-theme .nav-btn{color:#52657b}
+  body.light-theme .nav-btn.active,body.light-theme .nav-btn:hover{background:#e8f4fb;border-color:#b9d8e9;color:#075477;box-shadow:none}
+  body.light-theme .stat-card,body.light-theme .panel{background:#fff;border-color:#d8e2ee;box-shadow:0 5px 20px #193b5b0b}
+  body.light-theme .stat-card span,body.light-theme .stat-card small,
+  body.light-theme .panel label,body.light-theme .toggle-label,
+  body.light-theme .market-item small,body.light-theme .market-item em,
+  body.light-theme .metric-row span,body.light-theme th,
+  body.light-theme .chart-legend,body.light-theme .chart-note,
+  body.light-theme .footnote,body.light-theme .muted-copy,
+  body.light-theme .signal-explain,body.light-theme .contract-meta span,
+  body.light-theme .entry-current p,body.light-theme .entry-count-row span{color:#64748b}
+  body.light-theme .search,body.light-theme input,body.light-theme select,
+  body.light-theme .scan-side select{background:#fff;color:#172638;border-color:#cbd8e6}
+  body.light-theme .filter,body.light-theme .timeframes button{background:#f1f5f9;color:#52657b;border-color:#d5e0eb}
+  body.light-theme .filter.active,body.light-theme .timeframes button.active{background:#0876d9;color:#fff;border-color:#0876d9}
+  body.light-theme .market-item{border-bottom-color:#e5ebf2}
+  body.light-theme .market-item:hover,body.light-theme .market-item.selected{background:#eaf5fb}
+  body.light-theme .chart-wrap{background:linear-gradient(180deg,#f8fcff,#edf4fa);border-color:#d4e1ed}
+  body.light-theme .indicator,body.light-theme .compat-grid div,
+  body.light-theme .risk-result,body.light-theme .suggestion-card{background:#f1f6fa;border-color:#d8e2ee}
+  body.light-theme .reason-list{color:#34465b}
+  body.light-theme .outline-btn{background:#f0f7fb;color:#087eaa;border-color:#b9d8e9}
+  body.light-theme .manual-note{background:#fff7e6;color:#8a5a08}
+  body.light-theme .opportunity-row,body.light-theme .recent-row,
+  body.light-theme .metric-row,body.light-theme th,body.light-theme td{border-bottom-color:#e2eaf2}
+  body.light-theme .suggestion-card p,body.light-theme .compat-grid p,
+  body.light-theme .source-choice p{color:#64748b}
+  body.light-theme .source-choice{border-color:#d5e0eb}
+  body.light-theme footer{border-top-color:#d8e2ee;color:#64748b}
+  body.light-theme footer span{color:#8292a5}
+  body.light-theme #view-scanner .radar-panel,
+  body.light-theme #view-scanner .scan-side{background:#fff}
+  body.light-theme #view-scanner .radar-panel .panel-head h2,
+  body.light-theme #view-scanner .scan-side h2{color:#172638}
+  body.light-theme #view-scanner .radar-grid{background:radial-gradient(circle,#e8f8ff 0%,#d7effa 48%,#f2f9fd 75%);border-color:#8ccde5}
+  body.light-theme #view-scanner .radar-grid:before,
+  body.light-theme #view-scanner .radar-grid:after{border-color:#6bb8d5}
+  body.light-theme #view-scanner .radar-grid>i{background:#73bcd6}
+  body.light-theme #view-scanner .radar-center{background:radial-gradient(circle,#b8efff,#eaf8ff 72%);color:#075477}
+  body.light-theme #view-scanner .radar-caption{color:#087eaa}
+  body.light-theme #view-scanner .scan-progress{background:#e5edf5}
+  body.light-theme #view-scanner .scan-terminal{background:#102338;border-color:#294963}
+  body.light-theme #view-scanner .contract-card{background:linear-gradient(145deg,#fff,#f1f7fc);border-color:#cbddeb}
+  body.light-theme #view-scanner .contract-pick{color:#087eaa}
+  body.light-theme #view-scanner .entry-current{background:linear-gradient(145deg,#f4fbff,#e3f2ff);border-color:#9bcce5}
+  body.light-theme #view-scanner .entry-symbol{color:#07865e;text-shadow:none}
+  body.light-theme #view-scanner .entry-score{color:#a66b08}
+  body.light-theme #view-scanner .scan-table-panel{background:#fff}
+  body.light-theme #view-scanner td{color:#26384c}
+  body.light-theme .theme-toggle{background:#edf5fa;color:#075477;border:1px solid #cbddeb;border-radius:8px;padding:9px 12px}
+
+
+/* ===== FULL-SCREEN BEST ENTRY ALERT ===== */
+#bestEntryOverlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(2,8,20,.88);backdrop-filter:blur(14px)}
+#bestEntryOverlay.show{display:flex;animation:entryFade .25s ease-out}
+#bestEntryOverlay .best-entry-modal{position:relative;width:min(900px,100%);max-height:94vh;overflow:auto;border:1px solid #00d9ff;border-radius:22px;padding:clamp(22px,4vw,46px);background:radial-gradient(ellipse at 50% 0%,#123c62 0,#0a1830 48%,#050d1d 100%);box-shadow:0 0 0 1px #00d9ff20,0 0 70px #00cfff35;text-align:center}
+#bestEntryOverlay .modal-close{position:absolute;right:17px;top:15px;width:38px;height:38px;border:1px solid #42617e;border-radius:50%;background:#10233d;color:#fff;font-size:21px}
+#bestEntryOverlay .modal-kicker{font:700 10px "Space Mono";letter-spacing:2px;color:#65eaff}
+#bestEntryOverlay .modal-title{font-size:clamp(25px,5vw,42px);margin:12px 0 8px;color:#fff}
+#bestEntryOverlay .modal-subtitle{font-size:12px;line-height:1.6;color:#a9bfd9;margin:0 auto 22px;max-width:650px}
+#bestEntryOverlay .best-market{font:800 clamp(24px,5vw,42px) "Space Mono";color:#65f4c0;margin:14px 0 4px;overflow-wrap:anywhere}
+#bestEntryOverlay .best-contract{font-size:clamp(18px,3vw,25px);font-weight:800;color:#fff;margin:8px 0 20px}
+#bestEntryOverlay .best-score{font:800 clamp(48px,9vw,76px) "Space Mono";color:#ffd45c;text-shadow:0 0 25px #ffc84a55;line-height:1.1}
+#bestEntryOverlay .best-score small{display:block;font:700 9px Inter,sans-serif;letter-spacing:2px;color:#9db2ca;margin-top:8px}
+#bestEntryOverlay .best-details{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0}
+#bestEntryOverlay .best-detail{padding:14px 9px;border:1px solid #234a6d;border-radius:11px;background:#0b2039}
+#bestEntryOverlay .best-detail span,#bestEntryOverlay .best-detail b{display:block}
+#bestEntryOverlay .best-detail span{font-size:9px;color:#9db2ca;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+#bestEntryOverlay .best-detail b{font:700 13px "Space Mono";color:#eaf8ff;overflow-wrap:anywhere}
+#bestEntryOverlay .best-reason{max-width:700px;margin:0 auto 20px;color:#c1d5e9;font-size:11px;line-height:1.7}
+#bestEntryOverlay .best-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+#bestEntryOverlay .best-actions button{width:auto;min-width:170px;padding:13px 20px;font-size:11px}
+#bestEntryOverlay .best-disclaimer{font-size:9px;line-height:1.6;color:#91a5c4;margin:18px auto 0;max-width:720px}
+#bestEntryOverlay .no-entry{color:#ffd45c}
+body.light-theme #bestEntryOverlay .best-entry-modal{background:linear-gradient(145deg,#fff,#eaf5fc);border-color:#168bb7}
+body.light-theme #bestEntryOverlay .modal-title,body.light-theme #bestEntryOverlay .best-contract{color:#172638}
+body.light-theme #bestEntryOverlay .modal-subtitle,body.light-theme #bestEntryOverlay .best-reason{color:#52657b}
+body.light-theme #bestEntryOverlay .best-detail{background:#f1f7fb;border-color:#c9dce9}
+body.light-theme #bestEntryOverlay .best-detail b{color:#172638}
+body.light-theme #bestEntryOverlay .best-disclaimer{color:#64748b}
+@keyframes entryFade{from{opacity:0}to{opacity:1}}
+@media(max-width:600px){#bestEntryOverlay{padding:8px}#bestEntryOverlay .best-entry-modal{padding:28px 15px 20px;border-radius:16px}#bestEntryOverlay .best-details{grid-template-columns:1fr 1fr}#bestEntryOverlay .best-detail:last-child{grid-column:1/-1}}
+
+  </style>
+</head>
+<body class="light-theme">
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="CapitalFx Intelligence home">
+      <span class="brand-mark">✦</span><span><b>CAPITALFX</b><strong>INTELLIGENCE</strong><small>SCAN · ANALYSE · TRADE SMARTER</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <button class="nav-btn active" data-view="dashboard">⌂ <span>Dashboard</span></button>
+      <button class="nav-btn" data-view="scanner">⌕ <span>Market Scanner</span></button>
+      <button class="nav-btn" data-view="analysis">◈ <span>AI Analysis</span></button>
+      <button class="nav-btn" data-view="suggestions">✧ <span>Trade Suggestions</span></button>
+      <button class="nav-btn" data-view="automation">▣ <span>Auto Trading</span></button>
+      <button class="nav-btn" data-view="risk">⬡ <span>Risk Manager</span></button>
+      <button class="nav-btn" data-view="settings">⚙ <span>Settings</span></button>
+    </nav>
+    <div class="connection"><i></i><span><b id="feedStatus">LOCAL FEED</b><small id="feedSub">Local generated feed</small></span></div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode">☾ DARK</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+  </header>
+
+  <main>
+    <section class="view active" id="view-dashboard">
+      <div class="stats-grid">
+        <article class="stat-card cyan"><span>DATA SOURCE</span><b id="sourceStat">LOCAL FEED</b><small>Not a live CapitalFx feed</small></article>
+        <article class="stat-card purple"><span>MARKETS MONITORED</span><b>17</b><small>Verified from supplied HTML</small></article>
+        <article class="stat-card gold"><span>ACTIVE SIGNALS</span><b id="signalCount">0</b><small>Current analytical opportunities</small></article>
+        <article class="stat-card green"><span>STRATEGY STATUS</span><b id="strategyStatus">READY</b><small>Indicator-based analysis</small></article>
+        <article class="stat-card pink"><span>EXECUTION</span><b>DISABLED</b><small>No authorised API verified</small></article>
+      </div>
+
+      <div class="dashboard-grid">
+        <aside class="panel market-panel">
+          <div class="panel-head"><h2>MARKET SCANNER</h2><span class="live-tag">17 CONFIGURED</span></div>
+          <input id="marketSearch" class="search" placeholder="Search verified markets…">
+          <div class="filter-row" id="marketFilters">
+            <button class="filter active" data-filter="ALL">All</button><button class="filter" data-filter="STANDARD">Standard</button><button class="filter" data-filter="HF">1s High-Freq</button>
+          </div>
+          <div id="marketList" class="market-list"></div>
+        </aside>
+
+        <section class="panel chart-panel">
+          <div class="chart-heading">
+            <div><span class="eyebrow">SELECTED INSTRUMENT</span><h1 id="selectedName">Volatility 75</h1><div class="price-line"><b id="selectedPrice">—</b><span id="selectedChange">—</span></div></div>
+            <div class="feed-pill"><i></i><span id="chartFeedLabel">LOCAL FEED DATA</span></div>
+          </div>
+          <div class="chart-tools"><div class="timeframes" id="timeframes"><button class="active" data-tf="1m">1m</button><button data-tf="5m">5m</button><button data-tf="15m">15m</button><button data-tf="1h">1h</button></div><label class="toggle-label"><input id="showBands" type="checkbox" checked> Bollinger</label></div>
+          <div class="chart-wrap"><canvas id="priceChart"></canvas></div>
+          <div class="chart-legend"><span><i class="dot price"></i> Price</span><span><i class="dot ema"></i> EMA 9</span><span><i class="dot sma"></i> SMA 20</span><span><i class="dot band"></i> Bollinger bands</span></div>
+          <div class="indicator-strip" id="indicatorStrip"></div>
+          <div class="chart-note">Chart and indicators use the selected feed classification. Locally generated values are for interface testing only.</div>
+        </section>
+
+        <aside class="right-stack">
+          <article class="panel signal-panel">
+            <div class="panel-head"><h2>AI SIGNAL</h2><span class="tag" id="signalTag">WAIT</span></div>
+            <div class="signal-main"><div class="signal-word" id="signalWord">WAIT</div><div class="confidence-ring" id="confidenceRing"><b id="confidence">—</b><small>AGREEMENT</small></div></div>
+            <div class="reason-list" id="reasonList"><p>Waiting for sufficient price history.</p></div>
+            <p class="signal-explain" id="signalExplain">Analysis will appear when the selected market has enough observations.</p>
+            <button class="outline-btn" data-goto="analysis">View full analysis →</button>
+          </article>
+          <article class="panel trade-panel">
+            <div class="panel-head"><h2>TRADE PLANNER</h2><span class="tag muted">MANUAL</span></div>
+            <label>Contract family<select id="contractFamily"><option value="EO">Even / Odd</option><option value="MD">Matches / Differs</option><option value="OU">Over / Under</option></select></label>
+            <label>Prediction<select id="contractDirection"></select></label>
+            <label>Duration<select id="duration"><option value="5t">5 ticks</option><option value="10t">10 ticks</option><option value="15t">15 ticks</option><option value="25t">25 ticks</option><option value="50t">50 ticks</option><option value="60s">1 minute</option><option value="120s">2 minutes</option><option value="300s">5 minutes</option></select></label>
+            <label id="digitLabel" class="hidden">Selected digit<input id="selectedDigit" type="number" min="0" max="9" value="5"></label>
+            <label id="barrierLabel" class="hidden">Barrier / reference level<input id="barrier" type="number" step="any"></label>
+            <div class="manual-note">Suggestions only. Open CapitalFx separately to execute manually.</div>
+            <button class="primary-btn" id="openCapitalFx">Open CapitalFx ↗</button>
+          </article>
+        </aside>
+      </div>
+
+      <div class="lower-grid">
+        <article class="panel"><div class="panel-head"><h2>TOP OPPORTUNITIES</h2><button class="text-btn" data-goto="scanner">Scan all →</button></div><div id="topOpportunities" class="opportunity-list"></div></article>
+        <article class="panel"><div class="panel-head"><h2>PERFORMANCE / DATA QUALITY</h2><span class="tag warning">NO LIVE HISTORY</span></div><div class="quality-grid"><div><b>17</b><small>Configured instruments</small></div><div><b>0</b><small>Verified live streams</small></div><div><b>0</b><small>Executed orders</small></div></div><p class="muted-copy">No win rate or profit is fabricated. Strategy performance will only be reported after independently recorded, timestamped signal outcomes.</p></article>
+        <article class="panel"><div class="panel-head"><h2>RECENT SIGNALS</h2><span class="tag muted">THIS SESSION</span></div><div id="recentSignals" class="recent-list"><p class="muted-copy">No signals recorded yet.</p></div></article>
+      </div>
+    </section>
+
+    <section class="view" id="view-scanner">
+      <div class="page-title"><div><span class="eyebrow">AUTONOMOUS MARKET INTELLIGENCE</span><h1>AI Robotic Market Scanner</h1><p>Scans all 17 volatility markets across Matches/Differs, Even/Odd and Over/Under · signal-only.</p></div><div class="scanner-controls"><button class="primary-btn" id="runScan">▶ SCAN ALL MARKETS</button><button class="outline-btn" id="pauseScan" disabled>Ⅱ PAUSE</button><button class="outline-btn" id="stopScan" disabled>■ STOP</button></div></div>
+      <div class="scanner-layout">
+        <article class="panel radar-panel" id="radarPanel"><div class="panel-head"><div><span class="eyebrow">NEURAL SCAN CORE</span><h2>Market intelligence radar</h2></div><span class="tag warning" id="scanState">STANDBY</span></div>
+          <div class="radar-stage" id="radarStage"><div class="radar-grid"><i></i><i></i><i></i><i></i><div class="radar-sweep"></div><b class="radar-center">AI</b><span class="radar-point p1"></span><span class="radar-point p2"></span><span class="radar-point p3"></span><span class="radar-point p4"></span></div><div class="radar-caption" id="radarCaption">SYSTEM READY · AWAITING SCAN COMMAND</div></div>
+          <div class="scan-progress-head"><span id="scanStage">Awaiting initialisation</span><b id="scanPercent">0%</b></div><div class="scan-progress"><i id="scanProgressBar"></i></div>
+          <div class="scan-terminal"><div class="terminal-head"><span>▣ LIVE ANALYSIS TERMINAL</span><span class="terminal-live" id="terminalLive">IDLE</span></div><div id="scanTerminal" class="terminal-lines"><p><b>SYS</b> Scanner core initialised.</p><p><b>DATA</b> Local demonstration feed detected; live CapitalFx stream not connected.</p><p><b>SAFE</b> Trade execution is disabled.</p></div></div>
+        </article>
+        <aside class="panel scan-side entry-feed"><div class="panel-head"><div><span class="eyebrow">ONE-BY-ONE SIGNAL STREAM</span><h2>ENTRY DISCOVERIES</h2></div><span class="tag warning" id="entryFeedState">WAITING</span></div><div class="entry-current" id="entryCurrent"><div class="entry-icon">⌁</div><div class="entry-empty-title">Awaiting next instrument</div><p>Scanner evaluates all 17 volatility markets and three contract families. Qualified setups appear here individually.</p></div><div class="entry-count-row"><span>Markets processed</span><b id="marketsEvaluated">0 / 17</b></div><div class="entry-count-row"><span>Digit observations</span><b id="digitObservations">0</b></div><div class="entry-count-row"><span>Live verified feed</span><b class="danger-text">NOT CONNECTED</b></div><div class="scan-divider"></div><label class="switch-row"><span>Automatic rescanning</span><span class="switch"><input id="autoRescan" type="checkbox"><span></span></span></label><label>Full-cycle interval<select id="autoRescanInterval"><option value="30">30 seconds</option><option value="60" selected>1 minute</option><option value="300">5 minutes</option></select></label><p class="footnote">Only scores above 75 qualify. The confidence score is a heuristic ranking, not a measured win probability. This file currently uses locally generated demonstration prices, not a live tick feed; entries are simulations, not verified live trading signals.</p></aside>
+      </div>
+      <div class="scanner-results-head"><div><span class="eyebrow">CONTRACT INTELLIGENCE</span><h2>Best opportunities by contract</h2></div><span class="tag warning" id="resultsStatus">NOT SCANNED</span></div>
+      <div class="scanner-filters" id="scannerFilters"><button class="filter active" data-scan-filter="ALL">All contracts</button><button class="filter" data-scan-filter="EO">Even / Odd</button><button class="filter" data-scan-filter="MD">Matches / Differs</button><button class="filter" data-scan-filter="OU">Over / Under</button><button class="filter" data-scan-filter="BEST">Above 75%</button></div>
+      <div id="contractResults" class="contract-results"><div class="panel empty-scan"><div class="empty-orb">⌁</div><h3>Scanner standing by</h3><p>Start a scan to evaluate digit distributions and contract conditions across every configured market.</p></div></div>
+      <div class="panel scan-table-panel"><div class="panel-head"><h2>INSTRUMENT DIAGNOSTICS</h2><span class="tag muted">TECHNICAL CONTEXT ONLY</span></div><div class="table-wrap"><table><thead><tr><th>Instrument</th><th>Type</th><th>Last price</th><th>Trend</th><th>RSI</th><th>Volatility</th><th>Sample digits</th></tr></thead><tbody id="scannerRows"></tbody></table></div></div>
+      <p class="footnote">Important: this supplied single-file app has no authenticated CapitalFx market feed. Its generated local data is for interface and calculation testing only. A statistical imbalance is not a validated prediction; all recommendations remain NO TRADE until genuine data and out-of-sample validation are connected.</p>
+    </section>
+
+    <section class="view" id="view-analysis">
+      <div class="page-title"><div><span class="eyebrow">TECHNICAL INTELLIGENCE</span><h1>AI Analysis</h1><p>Transparent, rule-based technical analysis. No opaque prediction claims.</p></div><select id="analysisMarket" class="compact-select"></select></div>
+      <div class="analysis-grid">
+        <article class="panel"><h2>Market structure</h2><div id="structureRows" class="metric-rows"></div></article>
+        <article class="panel"><h2>Momentum & trend</h2><div id="momentumRows" class="metric-rows"></div></article>
+        <article class="panel"><h2>Volatility & bands</h2><div id="volatilityRows" class="metric-rows"></div></article>
+        <article class="panel"><h2>Signal explanation</h2><div id="analysisReasons" class="reason-list"></div><p id="analysisNarrative" class="signal-explain"></p></article>
+      </div>
+      <div class="panel digit-analysis"><div class="panel-head"><h2>DIGIT DISTRIBUTION</h2><span class="tag warning">LOCAL FEED SAMPLE</span></div><div id="digitBars" class="digit-bars"></div><p class="footnote">A frequency imbalance in a short sample is descriptive, not proof that the next digit is predictable. Digit-family suggestions remain WAIT until adequate genuine data and validation are available.</p></div>
+    </section>
+
+    <section class="view" id="view-suggestions">
+      <div class="page-title"><div><span class="eyebrow">DECISION SUPPORT</span><h1>Trade Suggestions</h1><p>Entry conditions, duration compatibility and reasoning.</p></div></div>
+      <div id="suggestionCards" class="suggestion-grid"></div>
+      <div class="panel"><h2>Contract compatibility rules</h2><div class="compat-grid"><div><b>Even / Odd</b><p>Requires digit-level observations at the contract's settlement precision. Trend indicators alone cannot justify parity calls.</p></div><div><b>Matches / Differs</b><p>Requires a selected digit, sufficient digit samples and a tested probability model.</p></div><div><b>Over / Under</b><p>Requires a verified strike/barrier rule and expiry-price observations.</p></div><div><b>Higher / Lower</b><p>Requires confirmation that the live CapitalFx interface exposes this as a distinct supported contract family.</p></div></div></div>
+    </section>
+
+    <section class="view" id="view-automation">
+      <div class="page-title"><div><span class="eyebrow">CONTROLLED AUTOMATION</span><h1>Auto Trading</h1><p>Automation remains signal-only unless CapitalFx supplies an authorised execution integration.</p></div><span class="tag danger">EXECUTION DISABLED</span></div>
+      <div class="automation-grid">
+        <article class="panel"><div class="status-orb">Ⅱ</div><h2>Signal-only automation</h2><p class="muted-copy">The scanner can refresh analysis and log qualifying signals. It cannot submit, modify or settle CapitalFx orders.</p><div class="switch-row"><span>Enable automatic signal scanning</span><label class="switch"><input type="checkbox" id="signalAutomation"><span></span></label></div><label>Scan interval<select id="scanInterval"><option value="5">5 seconds</option><option value="15" selected>15 seconds</option><option value="30">30 seconds</option><option value="60">60 seconds</option></select></label><button class="outline-btn" id="saveAutomation">Save signal settings</button></article>
+        <article class="panel blocked-panel"><div class="lock-icon">🔒</div><h2>External order execution</h2><span class="tag danger">NOT AUTHORISED / NOT VERIFIED</span><p>The supplied HTML contains no official external order API or market WebSocket. No execution adapter can safely be enabled yet.</p><ul><li>No credentials requested or stored.</li><li>No browser automation or private endpoint scraping.</li><li>No false order confirmations.</li><li>Execution requires official documentation and explicit permission.</li></ul></article>
+      </div>
+      <div class="panel"><h2>Automation event log</h2><div id="automationLog" class="recent-list"><p class="muted-copy">Signal-only automation is off.</p></div></div>
+    </section>
+
+    <section class="view" id="view-risk">
+      <div class="page-title"><div><span class="eyebrow">CAPITAL PROTECTION</span><h1>Risk Manager</h1><p>Planning limits for manual decisions. These controls do not enforce limits inside CapitalFx.</p></div></div>
+      <div class="risk-grid">
+        <article class="panel"><h2>Stake controls</h2><label>Suggested maximum stake (USD)<input id="maxStake" type="number" min="0.01" step="0.01" value="10"></label><label>Maximum stake as % of planned bankroll<input id="maxStakePct" type="number" min="0.1" max="100" step="0.1" value="1"></label><label>Planned bankroll (USD)<input id="bankroll" type="number" min="0" step="0.01" value="1000"></label><div class="risk-result"><small>Calculated stake ceiling</small><b id="stakeCeiling">$10.00</b></div></article>
+        <article class="panel"><h2>Session limits</h2><label>Daily loss limit (USD)<input id="dailyLoss" type="number" min="0" step="0.01" value="30"></label><label>Maximum consecutive losses<input id="lossStreak" type="number" min="1" step="1" value="3"></label><label>Maximum planned trades per day<input id="dailyTrades" type="number" min="1" step="1" value="10"></label><button class="primary-btn" id="saveRisk">Save risk plan</button><p class="footnote">Limits are advisory in this independent application. They cannot stop a trade submitted manually on CapitalFx.</p></article>
+      </div>
+    </section>
+
+    <section class="view" id="view-settings">
+      <div class="page-title"><div><span class="eyebrow">APPLICATION CONFIGURATION</span><h1>Settings & integrations</h1><p>Independent data-source configuration and platform handoff.</p></div></div>
+      <div class="settings-grid">
+        <article class="panel"><h2>Market data source</h2><div class="source-choice selected"><b>Local locally generated feed</b><span class="tag warning">ACTIVE</span><p>Generated locally for analysis and indicator calculations. Not live CapitalFx prices.</p></div><div class="source-choice disabled"><b>Authorised CapitalFx feed</b><span class="tag danger">NOT CONFIGURED</span><p>Awaiting official API/WebSocket documentation and permission.</p></div><label>CapitalFx website URL<input id="capitalUrl" value="https://capitalfx.trade/" readonly></label></article>
+        <article class="panel"><h2>Application safeguards</h2><ul class="safeguard-list"><li>Independent frontend and source code.</li><li>No Deriv SDK, API, credentials or endpoints.</li><li>No CapitalFx Supabase credentials reused.</li><li>Data provenance is visible throughout the UI.</li><li>Automatic order execution is disabled by design.</li></ul><button class="outline-btn" id="exportSignals">Export signal log (CSV)</button></article>
+      </div>
+    </section>
+  </main>
+  <footer>CAPITALFX INTELLIGENCE <span>Independent analysis tool · Not affiliated with CapitalFx · Trading involves substantial risk</span></footer>
+</div>
+
+<div id="bestEntryOverlay" role="dialog" aria-modal="true" aria-labelledby="bestEntryTitle">
+  <div class="best-entry-modal">
+    <button class="modal-close" id="closeBestEntry" aria-label="Close result">×</button>
+    <div class="modal-kicker" id="bestEntryKicker">CAPITALFX INTELLIGENCE · SCAN COMPLETE</div>
+    <h2 class="modal-title" id="bestEntryTitle">BEST ENTRY IDENTIFIED</h2>
+    <p class="modal-subtitle" id="bestEntrySubtitle">The scanner has compared all configured markets and contract families.</p>
+    <div class="best-market" id="bestEntryMarket">—</div>
+    <div class="best-contract" id="bestEntryContract">—</div>
+    <div class="best-score" id="bestEntryScore">—<small>HEURISTIC SETUP SCORE</small></div>
+    <div class="best-details">
+      <div class="best-detail"><span>Suggested contract</span><b id="bestEntryPick">—</b></div>
+      <div class="best-detail"><span>Relative volatility</span><b id="bestEntryVolatility">—</b></div>
+      <div class="best-detail"><span>Observations checked</span><b id="bestEntrySamples">—</b></div>
+    </div>
+    <p class="best-reason" id="bestEntryReason">—</p>
+    <div class="best-actions">
+      <button class="primary-btn" id="scanAgainFromModal">SCAN AGAIN</button>
+      <button class="outline-btn" id="dismissBestEntry">CLOSE RESULT</button>
+    </div>
+    <p class="best-disclaimer">Important: this file uses locally generated demonstration prices, not a verified live market feed. The score is a heuristic ranking, not a probability of winning. Treat this as a simulated research result, not a live trading instruction.</p>
+  </div>
+</div>
+
+<script>
+// CapitalFx Intelligence market catalogue and technical indicators.
+// Instrument IDs/names/expiry options are transcribed from the supplied CapitalFx HTML.
+// No market feed or order execution is implemented here.
+const MARKETS = [
+ ["V10","Volatility 10","STANDARD",1000,.10,.010,.015],
+ ["V25","Volatility 25","STANDARD",2500,.25,.015,.020],
+ ["V50","Volatility 50","STANDARD",5000,.50,.020,.030],
+ ["V75","Volatility 75","STANDARD",7500,.75,.025,.040],
+ ["V100","Volatility 100","STANDARD",10000,1,.030,.050],
+ ["V10_1S","Volatility 10 (1s)","HF",1000,.10,.012,.015],
+ ["V15_1S","Volatility 15 (1s)","HF",1500,.15,.013,.018],
+ ["V25_1S","Volatility 25 (1s)","HF",2500,.25,.015,.020],
+ ["V30_1S","Volatility 30 (1s)","HF",3000,.30,.016,.022],
+ ["V50_1S","Volatility 50 (1s)","HF",5000,.50,.020,.030],
+ ["V75_1S","Volatility 75 (1s)","HF",7500,.75,.024,.038],
+ ["V90_1S","Volatility 90 (1s)","HF",9000,.90,.027,.044],
+ ["V100_1S","Volatility 100 (1s)","HF",10000,1,.030,.050],
+ ["V150_1S","Volatility 150 (1s)","HF",15000,1.5,.035,.065],
+ ["V200_1S","Volatility 200 (1s)","HF",20000,2,.040,.080],
+ ["V250_1S","Volatility 250 (1s)","HF",25000,2.5,.045,.095],
+ ["V300_1S","Volatility 300 (1s)","HF",30000,3,.050,.110]
+].map(([id,name,category,basePrice,volatility,jumpProb,jumpMag])=>({id,name,category,basePrice,volatility,jumpProb,jumpMag}));
+
+const EXPIRIES = {ticks:[5,10,15,25,50],seconds:[60,120,300]};
+const CONTRACTS = {
+ EO:[["EVEN","Even"],["ODD","Odd"]],
+ MD:[["MATCH","Matches"],["DIFFER","Differs"]],
+ OU:[["OVER","Over"],["UNDER","Under"]]
+};
+const CAPITALFX_URL = "https://capitalfx.trade/";
+
+function sma(a,n){if(a.length<n)return null;return a.slice(-n).reduce((x,y)=>x+y,0)/n}
+function emaSeries(a,n){if(a.length<n)return [];let k=2/(n+1),v=a.slice(0,n).reduce((x,y)=>x+y,0)/n,out=Array(n-1).fill(null);out.push(v);for(let i=n;i<a.length;i++){v=a[i]*k+v*(1-k);out.push(v)}return out}
+function rsi(a,n=14){if(a.length<n+1)return null;let gains=0,losses=0;for(let i=a.length-n;i<a.length;i++){let d=a[i]-a[i-1];if(d>0)gains+=d;else losses-=d}if(losses===0)return 100;let rs=(gains/n)/(losses/n);return 100-100/(1+rs)}
+function macd(a){const e12=emaSeries(a,12),e26=emaSeries(a,26);if(!e26.length)return null;let line=[];for(let i=0;i<a.length;i++)if(e12[i]!=null&&e26[i]!=null)line.push(e12[i]-e26[i]);const sig=emaSeries(line,9);if(!sig.length)return null;return {line:line.at(-1),signal:sig.at(-1),histogram:line.at(-1)-sig.at(-1)}}
+function bollinger(a,n=20,mult=2){if(a.length<n)return null;let w=a.slice(-n),mid=w.reduce((x,y)=>x+y,0)/n,sd=Math.sqrt(w.reduce((x,y)=>x+(y-mid)**2,0)/n);return {mid,upper:mid+mult*sd,lower:mid-mult*sd,width:(4*sd)/(mid||1)*100}}
+function volatility(a,n=20){if(a.length<n+1)return null;let rets=[];for(let i=a.length-n;i<a.length;i++)rets.push(Math.log(a[i]/a[i-1]));let mean=rets.reduce((x,y)=>x+y,0)/rets.length;return Math.sqrt(rets.reduce((x,y)=>x+(y-mean)**2,0)/rets.length)*100}
+function supportResistance(a,n=40){let w=a.slice(-n);return {support:Math.min(...w),resistance:Math.max(...w)}}
+function analyze(market,history){
+ const p=history.map(x=>typeof x==="number"?x:x.price),last=p.at(-1),r=rsi(p),e9=sma(p.slice(-9),9),e20=sma(p.slice(-20),20),e50=sma(p.slice(-50),50),mc=macd(p),bb=bollinger(p),vol=volatility(p),sr=supportResistance(p),momentum=p.length>6?(last-p.at(-6))/p.at(-6)*100:null;
+ const reasons=[];let score=0;
+ if(e9!=null&&e20!=null){if(e9>e20){score++;reasons.push("EMA/SMA short-term structure is bullish")}else if(e9<e20){score--;reasons.push("EMA/SMA short-term structure is bearish")}}
+ if(mc){if(mc.histogram>0){score++;reasons.push("MACD histogram is positive")}else if(mc.histogram<0){score--;reasons.push("MACD histogram is negative")}}
+ if(r!=null){if(r>=55&&r<70){score++;reasons.push("RSI supports bullish momentum")}else if(r<=45&&r>30){score--;reasons.push("RSI supports bearish momentum")}else if(r>=70)reasons.push("RSI is overbought; chasing longs is risky");else if(r<=30)reasons.push("RSI is oversold; chasing shorts is risky")}
+ if(momentum!=null){if(momentum>0)reasons.push(`Recent momentum is positive (${momentum.toFixed(3)}%)`);else reasons.push(`Recent momentum is negative (${momentum.toFixed(3)}%)`)}
+ let signal=score>=2?"BUY":score<=-2?"SELL":"WAIT";
+ // Never claim directional indicators establish a digit-contract edge.
+ let agreement=Math.round(Math.min(95,Math.abs(score)/3*75+20));
+ if(signal==="WAIT")agreement=Math.max(0,Math.round(Math.abs(score)*18));
+ return {last,rsi:r,ema9:e9,sma20:e20,sma50:e50,macd:mc,bollinger:bb,volatility:vol,momentum,support:sr.support,resistance:sr.resistance,signal,agreement,reasons,history:p};
+}
+function digitCounts(history){let c=Array(10).fill(0);for(const x of history){const p=typeof x==="number"?x:x.price;c[Math.floor(p*100)%10]++}return c}
+function simulateNext(market,price){const z=()=>{let u=Math.random()||1e-9,v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};let dt=1/86400,jump=Math.random()<market.jumpProb?(Math.random()<.5?-1:1)*market.jumpMag*Math.random():0;let next=price*Math.exp(-.5*market.volatility**2*dt+market.volatility*Math.sqrt(dt)*z()+jump);return Number.isFinite(next)&&next>0?next:price}
+
+const $=id=>document.getElementById(id);
+const state={selected:"V100_1S",filter:"ALL",timeframe:"1m",histories:{},signals:[],signalTimer:null,auto:false};
+const fmt=(n,d=2)=>Number.isFinite(n)?n.toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d}):"—";
+const market=id=>MARKETS.find(m=>m.id===id);
+for(const m of MARKETS){let p=m.basePrice,a=[];for(let i=0;i<180;i++){p=simulateNext(m,p);a.push(p)}state.histories[m.id]=a}
+function current(){return analyze(market(state.selected),state.histories[state.selected])}
+function setView(v){document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id==="view-"+v));document.querySelectorAll(".nav-btn").forEach(x=>x.classList.toggle("active",x.dataset.view===v));if(v==="scanner")renderScanner();if(v==="analysis")renderAnalysis();if(v==="suggestions")renderSuggestions();$("mainNav").classList.remove("open")}
+document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.goto)));
+$("menuToggle").addEventListener("click",()=>$("mainNav").classList.toggle("open"));
+function selectMarket(id){state.selected=id;$("analysisMarket").value=id;renderAll()}
+function renderMarkets(){let q=$("marketSearch").value.toLowerCase();$("marketList").innerHTML=MARKETS.filter(m=>(state.filter==="ALL"||m.category===state.filter)&&m.name.toLowerCase().includes(q)).map(m=>{let h=state.histories[m.id],c=(h.at(-1)-h.at(-2))/h.at(-2)*100;return `<div class="market-item ${m.id===state.selected?"selected":""}" data-market="${m.id}"><div><b>${m.name}</b><small>${m.category==="HF"?"1-second high-frequency":"Standard"}</small></div><div><strong>${fmt(h.at(-1),2)}</strong><em style="color:${c>=0?"#00f0a0":"#ff7895"}">${c>=0?"+":""}${c.toFixed(3)}%</em></div></div>`}).join("");document.querySelectorAll("[data-market]").forEach(x=>x.addEventListener("click",()=>selectMarket(x.dataset.market)))}
+$("marketSearch").addEventListener("input",renderMarkets);
+document.querySelectorAll("#marketFilters button").forEach(b=>b.addEventListener("click",()=>{state.filter=b.dataset.filter;document.querySelectorAll("#marketFilters button").forEach(x=>x.classList.toggle("active",x===b));renderMarkets()}));
+function drawChart(){const cv=$("priceChart"),w=cv.clientWidth,h=cv.clientHeight,dpr=devicePixelRatio||1;cv.width=w*dpr;cv.height=h*dpr;const c=cv.getContext("2d");c.scale(dpr,dpr);c.clearRect(0,0,w,h);let data=state.histories[state.selected],n=Math.min(data.length,150),a=data.slice(-n),min=Math.min(...a),max=Math.max(...a),pad=28,range=max-min||1,x=i=>pad+i/(n-1)*(w-pad*2),y=v=>h-pad-(v-min)/range*(h-pad*2);
+c.strokeStyle="#18365b";c.lineWidth=1;for(let i=0;i<5;i++){let yy=pad+i*(h-pad*2)/4;c.beginPath();c.moveTo(pad,yy);c.lineTo(w-pad,yy);c.stroke()}
+function line(vals,color,width=1.5){c.beginPath();let started=false;vals.forEach((v,i)=>{if(v==null)return;let xx=x(i+(n-vals.length));if(!started){c.moveTo(xx,y(v));started=true}else c.lineTo(xx,y(v))});c.strokeStyle=color;c.lineWidth=width;c.stroke()}
+line(a,"#00d9ff",2);line(emaSeries(a,9),"#ff50d8");line(emaSeries(a,20),"#ffc84a");
+if($("showBands").checked){let b=bollinger(a);if(b){c.setLineDash([4,4]);line(Array(n).fill(b.upper),"#438cff");line(Array(n).fill(b.lower),"#438cff");c.setLineDash([])}}
+c.fillStyle="#9bb0ce";c.font="10px Space Mono";c.fillText(fmt(max,2),pad,13);c.fillText(fmt(min,2),pad,h-6)}
+$("showBands").addEventListener("change",drawChart);window.addEventListener("resize",drawChart);
+document.querySelectorAll("#timeframes button").forEach(b=>b.addEventListener("click",()=>{state.timeframe=b.dataset.tf;document.querySelectorAll("#timeframes button").forEach(x=>x.classList.toggle("active",x===b));$("chartFeedLabel").textContent=`LOCAL FEED · ${state.timeframe}`}));
+function renderSignal(){let a=current(),word=$("signalWord");word.textContent=a.signal;word.style.color=a.signal==="BUY"?"#00f0a0":a.signal==="SELL"?"#ff7895":"#ffc84a";$("signalTag").textContent=a.signal;$("confidence").textContent=a.agreement+"%";$("confidenceRing").style.borderColor=a.signal==="BUY"?"#00c995":a.signal==="SELL"?"#ff4e80":"#a17a2b";$("signalExplain").textContent=a.signal==="WAIT"?"Indicator agreement is insufficient or mixed. Wait for clearer conditions.":`${a.signal} reflects agreement among selected trend and momentum rules. It is not a probability of contract success.`;$("reasonList").innerHTML=a.reasons.length?a.reasons.map(r=>`<p>✓ ${r}</p>`).join(""):"<p>Insufficient history for a reliable reading.</p>";$("signalCount").textContent=a.signal==="WAIT"?"0":"1";$("strategyStatus").textContent=a.signal==="WAIT"?"WAIT":"ACTIVE"}
+function metricRows(id,items){$(id).innerHTML=items.map(([k,v])=>`<div class="metric-row"><span>${k}</span><b>${v}</b></div>`).join("")}
+function renderAnalysis(){let a=current(),m=market(state.selected);metricRows("structureRows",[["Instrument",m.name],["Category",m.category],["Last price",fmt(a.last)],["Support",fmt(a.support)],["Resistance",fmt(a.resistance)],["EMA 9",fmt(a.ema9)],["SMA 20",fmt(a.sma20)],["SMA 50",fmt(a.sma50)]]);metricRows("momentumRows",[["RSI (14)",fmt(a.rsi)],["MACD",a.macd?fmt(a.macd.line,5):"Insufficient data"],["Signal line",a.macd?fmt(a.macd.signal,5):"—"],["Histogram",a.macd?fmt(a.macd.histogram,5):"—"],["Recent momentum",a.momentum==null?"—":a.momentum.toFixed(3)+"%"]]);metricRows("volatilityRows",[["Volatility (20)",a.volatility==null?"—":a.volatility.toFixed(4)+"%"],["Bollinger upper",a.bollinger?fmt(a.bollinger.upper):"—"],["Bollinger middle",a.bollinger?fmt(a.bollinger.mid):"—"],["Bollinger lower",a.bollinger?fmt(a.bollinger.lower):"—"],["Band width",a.bollinger?a.bollinger.width.toFixed(3)+"%":"—"]]);$("analysisReasons").innerHTML=a.reasons.map(x=>`<p>• ${x}</p>`).join("")||"<p>Not enough observations.</p>";$("analysisNarrative").textContent=`${m.name}: ${a.signal} with ${a.agreement}% indicator agreement. Feed classification: locally generated. Multi-timeframe analysis is not available from this one-second local sample.`;let counts=digitCounts(state.histories[state.selected].slice(-60)),max=Math.max(...counts,1);$("digitBars").innerHTML=counts.map((n,i)=>`<div class="digit-bar"><i style="height:${Math.max(3,n/max*78)}px"></i><small>${i}</small></div>`).join("")}
+function renderScanner(){ $("scannerRows").innerHTML=MARKETS.map(m=>{let a=analyze(m,state.histories[m.id]);return `<tr><td>${m.name}</td><td>${m.category==="HF"?"1s High-Freq":"Standard"}</td><td>${fmt(a.last)}</td><td>${a.ema9>a.sma20?"Bullish":a.ema9<a.sma20?"Bearish":"Neutral"}</td><td>${fmt(a.rsi,1)}</td><td>${a.volatility==null?"—":a.volatility.toFixed(3)+"%"}</td><td><span class="signal-badge ${a.signal}">${a.signal}</span></td><td>${a.agreement}%</td></tr>`}).join("");const pts=document.querySelectorAll(".radar-point");pts.forEach((pt,i)=>pt.classList.toggle("active",i===scanState.cursor%Math.max(1,pts.length)));}
+function renderSuggestions(){let ranked=MARKETS.map(m=>({m,a:analyze(m,state.histories[m.id])})).sort((x,y)=>y.a.agreement-x.a.agreement).slice(0,6);$("suggestionCards").innerHTML=ranked.map(({m,a})=>`<article class="suggestion-card"><span class="eyebrow">${m.category==="HF"?"1s HIGH-FREQ":"STANDARD"}</span><h3>${m.name}</h3><div class="signal-word" style="color:${a.signal==="BUY"?"#00f0a0":a.signal==="SELL"?"#ff7895":"#ffc84a"}">${a.signal}</div><p><b>Agreement:</b> ${a.agreement}%<br><b>Entry condition:</b> ${a.signal==="WAIT"?"No trade; wait for alignment":"Wait for next observation to confirm the same direction"}<br><b>Duration:</b> No duration recommendation until tick cadence and feed timing are verified.</p><p>${a.reasons.slice(0,3).join("; ")||"Insufficient data."}</p><span class="tag warning">LOCAL FEED DATA · MANUAL REVIEW</span></article>`).join("")}
+function renderTop(){let ranked=MARKETS.map(m=>({m,a:analyze(m,state.histories[m.id])})).sort((x,y)=>y.a.agreement-x.a.agreement).slice(0,4);$("topOpportunities").innerHTML=ranked.map(({m,a})=>`<div class="opportunity-row"><b>${m.name}</b><span class="signal-badge ${a.signal}">${a.signal}</span><span>${a.agreement}%</span></div>`).join("")}
+function renderRecent(){let s=state.signals.slice(-5).reverse();$("recentSignals").innerHTML=s.length?s.map(x=>`<div class="recent-row"><span>${x.time}</span><b>${x.market}</b><span class="signal-badge ${x.signal}">${x.signal}</span></div>`).join(""):"<p class='muted-copy'>No signals recorded yet.</p>"}
+function recordSignal(){for(const m of MARKETS){let a=analyze(m,state.histories[m.id]);if(a.signal!=="WAIT"&&a.agreement>=55){let key=m.id+a.signal+Math.floor(Date.now()/60000);if(!state.signals.some(x=>x.key===key)){state.signals.push({key,market:m.name,signal:a.signal,agreement:a.agreement,time:new Date().toLocaleTimeString()});if(state.signals.length>100)state.signals.shift()}}}renderRecent();renderTop()}
+function renderAll(){let m=market(state.selected),h=state.histories[state.selected],p=h.at(-1),chg=(p-h.at(-2))/h.at(-2)*100;$("selectedName").textContent=m.name;$("selectedPrice").textContent=fmt(p);$("selectedChange").textContent=(chg>=0?"+":"")+chg.toFixed(3)+"%";$("selectedChange").style.color=chg>=0?"#00f0a0":"#ff7895";$("analysisMarket").value=state.selected;renderMarkets();drawChart();renderSignal();let a=current();$("indicatorStrip").innerHTML=[["RSI 14",fmt(a.rsi,1)],["MACD",a.macd?fmt(a.macd.histogram,5):"—"],["VOLATILITY",a.volatility==null?"—":a.volatility.toFixed(3)+"%"],["SMA 20",fmt(a.sma20)]].map(([k,v])=>`<div class="indicator"><small>${k}</small><b>${v}</b></div>`).join("");renderTop()}
+// Multi-market scanner: evaluates every configured volatility market and all supported digit contracts.
+// Scores are heuristic setup scores based on the local demonstration sample, not win probabilities.
+const scanState={running:false,paused:false,progress:0,timer:null,autoTimer:null,filter:"ALL",results:[],cursor:0,processed:0,scoreHistory:[]};
+function terminal(msg,kind="SYS"){const box=$("scanTerminal"),p=document.createElement("p"),b=document.createElement("b");b.textContent=kind;p.append(b,document.createTextNode(msg));box.append(p);while(box.children.length>40)box.removeChild(box.firstChild);box.scrollTop=box.scrollHeight}
+function setScanProgress(n,label){scanState.progress=n;$("scanPercent").textContent=n+"%";$("scanProgressBar").style.width=n+"%";$("scanStage").textContent=label;$("marketsEvaluated").textContent=scanState.processed+" / "+MARKETS.length}
+function sampleDigits(m){return digitCounts(state.histories[m.id].slice(-120))}
+function contractMetrics(m){const counts=sampleDigits(m),total=counts.reduce((a,b)=>a+b,0),even=counts.filter((x,i)=>i%2===0).reduce((a,b)=>a+b,0),odd=total-even,over=counts.slice(5).reduce((a,b)=>a+b,0),under=total-over,sorted=counts.map((v,i)=>({digit:i,count:v})).sort((a,b)=>b.count-a.count),price=state.histories[m.id].at(-1);return {counts,total,even,odd,over,under,dominant:sorted[0],rare:sorted.at(-1),price}}
+function volatilityBand(v,max){let q=max?v/max:0;return q>.68?"vol-high":q>.34?"vol-mid":"vol-low"}
+function updateRadarVolatility(){let vals=MARKETS.map(m=>analyze(m,state.histories[m.id]).volatility||0),max=Math.max(...vals,0.0001);document.querySelectorAll(".radar-point").forEach((pt,i)=>{let v=vals[(scanState.cursor+i)%vals.length];pt.classList.remove("vol-low","vol-mid","vol-high");pt.classList.add(volatilityBand(v,max));pt.dataset.vol=(v*100).toFixed(2)+"%";pt.title="Relative volatility: "+(v*100).toFixed(3)+"%"})}
+function scanSound(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ctx=new C(),now=ctx.currentTime;[660,880,1100].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,now+i*.13);g.gain.exponentialRampToValueAtTime(.16,now+i*.13+.025);g.gain.exponentialRampToValueAtTime(.0001,now+i*.13+.19);o.connect(g);g.connect(ctx.destination);o.start(now+i*.13);o.stop(now+i*.13+.2)});setTimeout(()=>ctx.close(),900)}catch(e){terminal("Audio alert unavailable in this browser.","INFO")}}
+function candidate(m,family,pick,detail,edge,vol,maxVol,sampleSize){const relative=(vol||0)/(maxVol||1),sampleFactor=Math.min(sampleSize/120,1),score=Math.round(Math.min(95,50+relative*12+Math.min(edge,1)*28+sampleFactor*8));return {family,title:family==="EO"?"Even / Odd":family==="MD"?"Matches / Differs":"Over / Under",market:m,pick,detail,edge,score,volatility:vol,eligible:score>75}}
+function evaluateMarket(m,maxVol){const x=contractMetrics(m),a=analyze(m,state.histories[m.id]),out=[];const eoPick=x.even>=x.odd?"EVEN":"ODD",eoEdge=Math.abs(x.even-x.odd)/Math.max(1,x.total);out.push(candidate(m,"EO",eoPick,`Even ${x.even} · Odd ${x.odd} from ${x.total} sampled digits.`,eoEdge,a.volatility,maxVol,x.total));
+ const mdPick=x.dominant.count>=x.total/10?`MATCH ${x.dominant.digit}`:`DIFFER ${x.rare.digit}`,mdEdge=mdPick.startsWith("MATCH")?x.dominant.count/Math.max(1,x.total):1-x.rare.count/Math.max(1,x.total);out.push(candidate(m,"MD",mdPick,`Most frequent digit ${x.dominant.digit} (${x.dominant.count}); least frequent digit ${x.rare.digit} (${x.rare.count}).`,mdEdge,a.volatility,maxVol,x.total));
+ const ouPick=x.over>=x.under?"OVER 4":"UNDER 5",ouEdge=Math.abs(x.over-x.under)/Math.max(1,x.total);out.push(candidate(m,"OU",ouPick,`Over 4: ${x.over} observations · Under 5: ${x.under} observations.`,ouEdge,a.volatility,maxVol,x.total));return out}
+function renderEntry(m,results){const best=results.filter(r=>r.market.id===m.id).sort((a,b)=>b.score-a.score)[0],eligible=results.filter(r=>r.market.id===m.id&&r.eligible),box=$("entryCurrent");box.innerHTML=`<span class="entry-flag">${eligible.length?"ENTRY FOUND":"NO ENTRY ABOVE 75%"}</span><div class="entry-icon">${eligible.length?"⌁":"◌"}</div><div class="eyebrow">${m.name.toUpperCase()}</div><div class="entry-symbol">${eligible.length?eligible[0].pick:best.pick}</div><div class="entry-score">${eligible.length?eligible[0].score:best.score}<small>SETUP CONFIDENCE SCORE / 100</small></div><div class="entry-count-row"><span>Best contract</span><b>${eligible.length?eligible[0].title:best.title}</b></div><div class="entry-count-row"><span>Direction</span><b>${eligible.length?eligible[0].pick:best.pick}</b></div><div class="entry-count-row"><span>Volatility</span><b>${best.volatility==null?"—":best.volatility.toFixed(4)+"%"}</b></div><div class="entry-count-row"><span>Qualified contracts</span><b>${eligible.length} / 3</b></div><div class="entry-count-row"><span>Sample size</span><b>120 local observations</b></div><p>${eligible.length?`${eligible.length} contract setup(s) scored above 75. Review the contract detail below.`:"No contract setup exceeded 75 on this market. The scanner will continue to the next volatility."}</p>`;$("entryFeedState").textContent=eligible.length?"ENTRY FOUND":"SCANNING";$("digitObservations").textContent="120";$("radarCaption").textContent=`${m.name.toUpperCase()} · ${scanState.processed}/${MARKETS.length}`;for(const r of eligible)terminal(`${m.name}: ENTRY FOUND · ${r.title} · ${r.pick} · confidence score ${r.score}%.`,"ENTRY")}
+function buildContractResults(){return MARKETS.flatMap(m=>evaluateMarket(m,Math.max(...MARKETS.map(z=>analyze(z,state.histories[z.id]).volatility||0),.0001))).sort((a,b)=>b.score-a.score)}
+function renderContractResults(){let rows=scanState.results;if(scanState.filter==="EO"||scanState.filter==="MD"||scanState.filter==="OU")rows=rows.filter(r=>r.family===scanState.filter);else if(scanState.filter==="BEST")rows=rows.filter(r=>r.eligible);$("contractResults").innerHTML=rows.length?rows.map(r=>`<article class="contract-card"><span class="eyebrow">${r.title.toUpperCase()} · ${r.market.name.toUpperCase()}</span><h3>${r.market.name}</h3><div class="contract-pick">${r.pick}</div><div class="contract-meta"><span>Confidence score</span><b>${r.score}%</b></div><div class="contract-meta"><span>Contract</span><b>${r.title}</b></div><div class="contract-meta"><span>Volatility</span><b>${r.volatility==null?"—":r.volatility.toFixed(4)+"%"}</b></div><div class="contract-meta"><span>Entry status</span><b>${r.eligible?"ENTRY FOUND · ABOVE 75%":"WAIT · BELOW 76%"}</b></div><p>${r.detail}</p><p><b>Note:</b> Heuristic score from local demo data; it is not a measured probability of winning.</p></article>`).join(""):`<div class="panel empty-scan"><h3>No qualifying entries yet</h3><p>All configured markets and contract types were checked. No setup exceeded 75%.</p></div>`}
+
+function showBestEntry(best,qualifiedCount){
+ const overlay=$("bestEntryOverlay");
+ const qualified=!!best.eligible;
+ $("bestEntryKicker").textContent=qualified?"CAPITALFX INTELLIGENCE · TOP QUALIFIED SETUP":"CAPITALFX INTELLIGENCE · NO QUALIFIED SETUP";
+ $("bestEntryTitle").textContent=qualified?"BEST ENTRY IDENTIFIED":"NO STRONG ENTRY FOUND";
+ $("bestEntryTitle").classList.toggle("no-entry",!qualified);
+ $("bestEntrySubtitle").textContent=qualified
+  ?"One top-ranked setup has been selected after comparing every configured volatility market and all three contract families."
+  :"The full scan is complete. The highest-ranked setup is shown for reference, but it did not meet the qualification threshold.";
+ $("bestEntryMarket").textContent=best.market.name;
+ $("bestEntryContract").textContent=best.title;
+ $("bestEntryScore").innerHTML=`${best.score}%<small>HEURISTIC SETUP SCORE / 100</small>`;
+ $("bestEntryPick").textContent=best.pick;
+ $("bestEntryVolatility").textContent=best.volatility==null?"—":best.volatility.toFixed(4)+"%";
+ $("bestEntrySamples").textContent="120 local";
+ $("bestEntryReason").textContent=`${best.detail} ${qualifiedCount} setup(s) exceeded the current threshold across ${MARKETS.length} markets. ${qualified?"This is the highest-scoring qualifying setup.":"No setup exceeded the current 75% threshold; wait for a better reading."}`;
+ overlay.classList.add("show");
+ document.body.style.overflow="hidden";
+}
+function hideBestEntry(){
+ $("bestEntryOverlay").classList.remove("show");
+ document.body.style.overflow="";
+}
+$("closeBestEntry").addEventListener("click",hideBestEntry);
+$("dismissBestEntry").addEventListener("click",hideBestEntry);
+$("bestEntryOverlay").addEventListener("click",e=>{if(e.target===$("bestEntryOverlay"))hideBestEntry()});
+$("scanAgainFromModal").addEventListener("click",()=>{hideBestEntry();startScan()});
+
+async function processAllMarkets(){
+ scanState.results=[];scanState.processed=0;
+ const maxVol=Math.max(...MARKETS.map(m=>analyze(m,state.histories[m.id]).volatility||0),.0001);
+ terminal(`Scanning ${MARKETS.length} volatility markets across Matches/Differs, Even/Odd and Over/Under.`,"SYS");
+ for(let i=0;i<MARKETS.length;i++){
+  if(!scanState.running)return;
+  while(scanState.paused&&scanState.running)await new Promise(resolve=>setTimeout(resolve,150));
+  if(!scanState.running)return;
+  const m=MARKETS[i],rows=evaluateMarket(m,maxVol);
+  scanState.results.push(...rows);scanState.processed=i+1;scanState.cursor=i;
+  setScanProgress(Math.round((i+1)/MARKETS.length*100),`Scanning ${m.name} · evaluating 3 contract families`);
+  const found=rows.filter(r=>r.eligible);
+  terminal(`${m.name}: checked 3 contracts · ${found.length} setup(s) above 75%.`,found.length?"ENTRY":"SCAN");
+  if(found.length)found.forEach(r=>terminal(`Candidate: ${m.name} · ${r.title} · ${r.pick} · score ${r.score}%.`,"ALERT"));
+  updateRadarVolatility();renderScanner();
+  await new Promise(resolve=>setTimeout(resolve,115));
+ }
+ if(!scanState.running)return;
+ scanState.results.sort((a,b)=>b.score-a.score);
+ const qualified=scanState.results.filter(r=>r.eligible);
+ const best=qualified[0]||scanState.results[0];
+ if(best){
+  renderEntry(best.market,scanState.results);
+  showBestEntry(best,qualified.length);
+  if(qualified.length){scanSound();terminal(`Top setup selected: ${best.market.name} · ${best.title} · ${best.pick} · ${best.score}%.`,"TARGET")}
+  else terminal("Scan complete. No setup exceeded the 75% entry threshold.","SAFE");
+ }
+ updateRadarVolatility();renderContractResults();renderScanner();
+ $("resultsStatus").textContent=`${qualified.length} QUALIFIED · ${MARKETS.length} MARKETS`;
+ $("scanState").textContent="SCAN COMPLETE";$("scanState").className="tag warning";
+ $("runScan").disabled=false;$("runScan").textContent="↻ SCAN AGAIN";
+ $("pauseScan").disabled=true;$("pauseScan").textContent="Ⅱ PAUSE";$("stopScan").disabled=true;
+ document.querySelector(".radar-panel").classList.remove("scanning","paused");
+ scanState.running=false;scanState.paused=false;
+}
+function startScan(){
+ if(scanState.running)return;
+ hideBestEntry();
+ scanState.running=true;scanState.paused=false;scanState.scoreHistory=[];
+ scanState.results=[];scanState.processed=0;scanState.cursor=0;
+ $("runScan").disabled=true;$("runScan").textContent="SCANNING…";
+ $("pauseScan").disabled=false;$("pauseScan").textContent="Ⅱ PAUSE";
+ $("stopScan").disabled=false;$("scanState").textContent="SCANNING";
+ $("scanState").className="tag";$("entryFeedState").textContent="ACTIVE";
+ $("radarPanel").classList.add("scanning");$("radarPanel").classList.remove("paused");
+ $("scanPercent").textContent="0%";$("scanProgressBar").style.width="0%";
+ $("scanStage").textContent="Initialising market sweep";
+ $("marketsEvaluated").textContent=`0 / ${MARKETS.length}`;
+ $("contractResults").innerHTML='<div class="panel empty-scan"><div class="empty-orb">⌁</div><h3>Scanning all markets…</h3><p>Comparing every configured market and contract family to select one top-ranked setup.</p></div>';
+ terminal("New full-market scan started.","SYS");
+ processAllMarkets();
+}
+function pauseScan(){
+ if(!scanState.running)return;
+ scanState.paused=!scanState.paused;
+ $("pauseScan").textContent=scanState.paused?"▶ RESUME":"Ⅱ PAUSE";
+ $("radarPanel").classList.toggle("paused",scanState.paused);
+ $("scanState").textContent=scanState.paused?"PAUSED":"SCANNING";
+ terminal(scanState.paused?"Scan paused by operator.":"Scan resumed.","SYS");
+}
+function stopScan(){
+ scanState.running=false;scanState.paused=false;
+ if(autoRescanTimer){clearInterval(autoRescanTimer);autoRescanTimer=null;$("autoRescan").checked=false;}
+ $("runScan").disabled=false;$("runScan").textContent="↻ SCAN ALL MARKETS";
+ $("pauseScan").disabled=true;$("pauseScan").textContent="Ⅱ PAUSE";$("stopScan").disabled=true;
+ $("radarPanel").classList.remove("scanning","paused");
+ $("scanState").textContent="STOPPED";$("entryFeedState").textContent="STOPPED";
+ $("radarCaption").textContent="SCAN HALTED BY OPERATOR";
+ terminal("Scanner stopped.","SYS");
+}
+$("runScan").addEventListener("click",startScan);
+$("pauseScan").addEventListener("click",pauseScan);
+$("stopScan").addEventListener("click",stopScan);
+document.querySelectorAll("[data-scan-filter]").forEach(b=>b.addEventListener("click",()=>{scanState.filter=b.dataset.scanFilter;document.querySelectorAll("[data-scan-filter]").forEach(x=>x.classList.toggle("active",x===b));renderContractResults()}));
+// Automatic scanner: one fresh scan immediately, then repeat at the selected interval.
+let autoRescanTimer=null;
+function stopAutoRescan(message=true){
+ if(autoRescanTimer){clearInterval(autoRescanTimer);autoRescanTimer=null;}
+ $("autoRescan").checked=false;
+ if(message)terminal("Automatic rescanning disabled.","SYS");
+}
+function startAutoRescan(){
+ if(autoRescanTimer)clearInterval(autoRescanTimer);
+ if(!$("autoRescan").checked)return;
+ const seconds=Math.max(10,+$("autoRescanInterval").value||60);
+ startScan();
+ autoRescanTimer=setInterval(()=>{if(!scanState.running)startScan()},seconds*1000);
+ terminal(`Automatic rescanning enabled; repeats every ${seconds} seconds. Local demo data only.`,"SYS");
+}
+$("autoRescan").disabled=false;$("autoRescanInterval").disabled=false;
+$("autoRescan").addEventListener("change",()=>{if($("autoRescan").checked)startAutoRescan();else stopAutoRescan()});
+$("autoRescanInterval").addEventListener("change",()=>{if($("autoRescan").checked)startAutoRescan()});
+terminal("Manual scan ready. Press SCAN ALL MARKETS to compare all configured markets and find the single top-ranked setup.","SAFE");
+// Theme preference is stored locally in this browser only.
+function setTheme(theme){document.body.classList.toggle("light-theme",theme==="light");$("themeToggle").textContent=theme==="light"?"☾ DARK":"☀ LIGHT";$("themeToggle").setAttribute("aria-label",theme==="light"?"Switch to dark mode":"Switch to light mode");try{localStorage.setItem("capitalfx-theme",theme)}catch(e){}}
+let savedTheme="light";try{savedTheme=localStorage.getItem("capitalfx-theme")||"light"}catch(e){}setTheme(savedTheme);$("themeToggle").addEventListener("click",()=>setTheme(document.body.classList.contains("light-theme")?"dark":"light"));
+
+function updateContractDirections(){let family=$("contractFamily").value,options=CONTRACTS[family];$("contractDirection").innerHTML=options.map(([v,l])=>`<option value="${v}" ${family==="EO"&&v==="ODD"?"selected":""}>${l}</option>`).join("");$("digitLabel").classList.toggle("hidden",family!=="MD");$("barrierLabel").classList.toggle("hidden",family!=="OU")}
+$("contractFamily").addEventListener("change",updateContractDirections);$("openCapitalFx").addEventListener("click",()=>window.open(CAPITALFX_URL,"_blank","noopener,noreferrer"));$("analysisMarket").innerHTML=MARKETS.map(m=>`<option value="${m.id}">${m.name}</option>`).join("");$("analysisMarket").addEventListener("change",e=>selectMarket(e.target.value));
+
+$("saveRisk").addEventListener("click",()=>{let bankroll=+$("bankroll").value,pct=+$("maxStakePct").value/100,cap=+$("maxStake").value;let value=Math.min(cap,bankroll*pct);$("stakeCeiling").textContent="$"+fmt(value);});
+["bankroll","maxStakePct","maxStake"].forEach(id=>$(id).addEventListener("input",()=>$("saveRisk").click()));
+function logAutomation(message){let el=$("automationLog");if(el.querySelector(".muted-copy"))el.innerHTML="";let p=document.createElement("p");p.className="recent-row";p.textContent=new Date().toLocaleTimeString()+" · "+message;el.prepend(p)}
+function configureSignalAutomation(){
+ state.auto=$("signalAutomation").checked;
+ if(state.signalTimer)clearInterval(state.signalTimer);
+ state.signalTimer=null;
+ if(state.auto){
+  const seconds=Math.max(1,+$("scanInterval").value||15);
+  const scanSignals=()=>{for(const m of MARKETS){const a=analyze(m,state.histories[m.id]);if(a.signal!=="WAIT"&&a.agreement>=55)logAutomation(`${m.name}: ${a.signal} · ${a.agreement}% agreement (signal only)`)}};
+  scanSignals();
+  state.signalTimer=setInterval(scanSignals,seconds*1000);
+  logAutomation(`Automatic signal scanning enabled (${seconds}s). Order execution remains disabled.`);
+ }else logAutomation("Automatic signal scanning stopped.");
+}
+$("signalAutomation").addEventListener("change",configureSignalAutomation);
+$("saveAutomation").addEventListener("click",configureSignalAutomation);
+$("exportSignals").addEventListener("click",()=>{let rows=[["time","market","signal","agreement"],...state.signals.map(x=>[x.time,x.market,x.signal,x.agreement])];let csv=rows.map(r=>r.join(",")).join("\n"),url=URL.createObjectURL(new Blob([csv],{type:"text/csv"})),a=document.createElement("a");a.href=url;a.download="capitalfx-intelligence-signals.csv";a.click();URL.revokeObjectURL(url)});
+document.querySelectorAll("#timeframes button").forEach(b=>b.addEventListener("click",()=>{$("chartFeedLabel").textContent="LOCAL FEED · "+b.dataset.tf}));
+function tick(){for(const m of MARKETS){let h=state.histories[m.id],p=simulateNext(m,h.at(-1));h.push(p);if(h.length>500)h.shift()}renderAll();if(document.querySelector("#view-scanner.active"))renderScanner();if(document.querySelector("#view-analysis.active"))renderAnalysis()}
+updateContractDirections();renderAll();renderScanner();renderRecent();setInterval(tick,1000);
+
+</script>
+</body></html>
